@@ -53,6 +53,7 @@ function onMessageHandler (channel, userstate, message, self) {
   }
 }
 
+// Called when a sub is gifted
 function subGiftHandler (channel, username, streakMonths, recipient, methods, userstate) {
   console.log(`[EVENT] ${username} giftede ${recipient} et sub!`)
   client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
