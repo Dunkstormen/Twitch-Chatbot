@@ -2,7 +2,7 @@ require('dotenv').config()
 const tmi = require('tmi.js')
 
 // eslint-disable-next-line prefer-regex-literals
-const regexpCommand = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/)
+const regexpCommand = new RegExp(/^!([a-zA-Z0-9æøåÆØÅ]+)(?:\W+)?(.*)?/)
 
 // Options for the bot
 const options = {
@@ -43,9 +43,16 @@ function onMessageHandler (channel, userstate, message, self) {
   // eslint-disable-next-line no-unused-vars
   const [raw, command, argurment] = message.match(regexpCommand)
 
+  // TODO: Create a database for commands, instead of them being hardcoded into the bot
   switch (command) {
     case 'ping':
       client.say(channel, 'Pong! POGGERS')
+      break
+    case 'merch':
+      client.say(channel, 'LET\'S GOOOOO FAM! HOP IND OG KØB EN T-SHIRT, ET MUNDBIND ELLER DIN YNDLINGSHOODIE! DU STØTTER MIG SAMTIDIG :heart: :heart: :heart: https://huckle.tv/')
+      break
+    case 'nytnytnyt':
+      client.say(channel, '!nymobil !nyeram og så en ny mobilholder.')
       break
     default:
       console.log(`Command ${command} does not exist!`)
@@ -56,10 +63,10 @@ function onMessageHandler (channel, userstate, message, self) {
 // Called when a sub is gifted
 function subGiftHandler (channel, username, streakMonths, recipient, methods, userstate) {
   console.log(`[EVENT] ${username} giftede ${recipient} et sub!`)
-  client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
+  // client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
 }
 
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
-  console.log(`* Connected to ${addr}:${port}`)
+  console.log(`[CONNECTION] Connected to ${addr}:${port}`)
 }
