@@ -31,7 +31,13 @@ client.on('subgift', (channel, username, streakMonths, recipient, methods, users
 // Connect to twitch
 client.connect()
 
-// Called every time a message comes in
+/**
+ * Called everytime a message is sent in the channel
+ * @param {string} channel - Channel message was sent in
+ * @param {import('tmi.js').ChatUserstate} userstate - Userstate of the message
+ * @param {string} message - Message sent in channel
+ * @param {boolean} self - Message sent by onMessageHandler
+ */
 function onMessageHandler (channel, userstate, message, self) {
   const isCommand = regexpCommand.test(message)
 
@@ -46,25 +52,37 @@ function onMessageHandler (channel, userstate, message, self) {
     case 'ping':
       client.say(channel, 'Pong! POGGERS')
       break
-    case 'merch':
+      /* case 'merch':
       client.say(channel, 'LET\'S GOOOOO FAM! HOP IND OG KØB EN T-SHIRT, ET MUNDBIND ELLER DIN YNDLINGSHOODIE! DU STØTTER MIG SAMTIDIG :heart: :heart: :heart: https://huckle.tv/')
-      break
-    case 'nytnytnyt':
+      break */
+      /* case 'nytnytnyt':
       client.say(channel, '!nymobil !nyeram og så en ny mobilholder.')
-      break
+      break */
     default:
       console.log(`Command ${command} does not exist!`)
       break
   }
 }
 
-// Called when a sub is gifted
-function subGiftHandler (channel, username, streakMonths, recipient, methods, userstate) {
+/**
+ * Called everytime someone gifts a sub in the channel
+ * @param {string} channel - Channel message was sent in
+ * @param {string} username - Username of the user gifting the subscription
+ * @param {integer} streakMonths - Recipients current streak
+ * @param {string} recipient - Username of the user recieving the gifted subscription
+ * @param {*} methods - TODO
+ * @param {import('tmi.js').ChatUserstate} userstate - Userstate for the gifted subscription
+ */
+async function subGiftHandler (channel, username, streakMonths, recipient, methods, userstate) {
   console.log(`[EVENT] ${username} giftede ${recipient} et sub!`)
-  // client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
+  await client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
 }
 
-// Called every time the bot connects to Twitch chat
+/**
+ * Called everytime a succesful connection is made to Twitch
+ * @param {string} addr - Remote address
+ * @param {integer} port - Remote port
+ */
 function onConnectedHandler (addr, port) {
   console.log(`[CONNECTION] Connected to ${addr}:${port}`)
 }
