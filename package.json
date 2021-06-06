@@ -16,7 +16,7 @@
     "husky": "^6.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/bot.js",
     "lint": "npx eslint .\\src",
     "prepare": "husky install"
   },

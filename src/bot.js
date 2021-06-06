@@ -1,5 +1,5 @@
-require('dotenv').config()
 const tmi = require('tmi.js')
+const config = require('./config')
 
 // eslint-disable-next-line prefer-regex-literals
 const regexpCommand = new RegExp(/^!([a-zA-Z0-9æøåÆØÅ]+)(?:\W+)?(.*)?/)
@@ -7,7 +7,7 @@ const regexpCommand = new RegExp(/^!([a-zA-Z0-9æøåÆØÅ]+)(?:\W+)?(.*)?/)
 // Options for the bot
 const options = {
   options: {
-    debug: process.env.DEBUG,
+    debug: config.DEBUG,
     messagesLogLevel: 'info'
   },
   connection: {
@@ -15,12 +15,10 @@ const options = {
     secure: true
   },
   identity: {
-    username: process.env.BOT_USERNAME,
-    password: process.env.OAUTH_TOKEN
+    username: config.BOT_USERNAME,
+    password: config.OAUTH_TOKEN
   },
-  channels: [
-    process.env.CHANNEL_NAME
-  ]
+  channels: [config.CHANNEL_NAME]
 }
 
 const client = new tmi.Client(options)
@@ -37,7 +35,7 @@ client.connect()
 function onMessageHandler (channel, userstate, message, self) {
   const isCommand = regexpCommand.test(message)
 
-  if (self || userstate.username === process.env.BOT_USERNAME) { return }
+  if (self || userstate.username === config.BOT_USERNAME) { return }
   if (!isCommand) { return }
 
   // eslint-disable-next-line no-unused-vars
