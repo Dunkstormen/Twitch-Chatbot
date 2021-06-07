@@ -41,14 +41,14 @@ client.connect()
 function onMessageHandler (channel, userstate, message, self) {
   const isCommand = regexpCommand.test(message)
 
-  if (self || userstate.username === config.BOT_USERNAME) { return }
+  if (self || userstate.username.toLowerCase() === config.BOT_USERNAME.toLowerCase()) { return }
   if (!isCommand) { return }
 
   // eslint-disable-next-line no-unused-vars
   const [raw, command, argurment] = message.match(regexpCommand)
 
   // TODO: Create a database for commands, instead of them being hardcoded into the bot
-  switch (command) {
+  switch (command.toLowerCase()) {
     case 'ping':
       client.say(channel, 'Pong! POGGERS')
       break
@@ -73,9 +73,9 @@ function onMessageHandler (channel, userstate, message, self) {
  * @param {*} methods - TODO
  * @param {import('tmi.js').ChatUserstate} userstate - Userstate for the gifted subscription
  */
-async function subGiftHandler (channel, username, streakMonths, recipient, methods, userstate) {
+function subGiftHandler (channel, username, streakMonths, recipient, methods, userstate) {
   console.log(`[EVENT] ${username} giftede ${recipient} et sub!`)
-  await client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
+  client.say(channel, `${username} gav lige ${recipient} et sub! huckle1LOVE huckle1LOVE`)
 }
 
 /**
