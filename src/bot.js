@@ -52,12 +52,9 @@ function onMessageHandler (channel, userstate, message, self) {
     case 'ping':
       client.say(channel, 'Pong! POGGERS')
       break
-      /* case 'merch':
-      client.say(channel, 'LET\'S GOOOOO FAM! HOP IND OG KØB EN T-SHIRT, ET MUNDBIND ELLER DIN YNDLINGSHOODIE! DU STØTTER MIG SAMTIDIG :heart: :heart: :heart: https://huckle.tv/')
-      break */
-      /* case 'nytnytnyt':
-      client.say(channel, '!nymobil !nyeram og så en ny mobilholder.')
-      break */
+    case 'shoutout':
+      client.say(channel, `Husk lige at tjekke ${argurment} ud! https://twitch.tv/${argurment}`)
+      break
     default:
       console.log(`Command ${command} does not exist!`)
       break
